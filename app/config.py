@@ -3,15 +3,18 @@ RAG系统配置文件
 """
 
 from dataclasses import asdict, dataclass
+from pathlib import Path
 from typing import Dict, Any
+
+APP_DIR = Path(__file__).resolve().parent
 
 @dataclass
 class RAGConfig:
     """RAG系统配置类"""
 
     # 路径配置
-    data_path: str = "../../data/C8/cook"
-    index_save_path: str = "./vector_index"
+    data_path: str = str(APP_DIR.parent / "data" / "recipes")
+    index_save_path: str = str(APP_DIR / "vector_index")
 
     # 模型配置
     embedding_model: str = "BAAI/bge-small-zh-v1.5"

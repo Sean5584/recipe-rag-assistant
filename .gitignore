@@ -6,4 +6,4 @@ __pycache__/
 .env.*
 !.env.example
 vector_index/
-/data/C8/
+/data/recipes/

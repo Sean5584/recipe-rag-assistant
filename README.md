@@ -1,27 +1,50 @@
-# 第八章实战：食谱 RAG 问答
+# 食谱 RAG 助手
 
-本仓库提取自 [Datawhale All-in-RAG 第八章](https://github.com/datawhalechina/all-in-rag/tree/cec956e80ae28d6c0ca84c9d39dddcf61ad633fd/docs/chapter8)。`code/C8` 保留原项目的全部源码和依赖清单。原项目采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)；本仓库添加了本地配置示例、忽略规则和运行说明。
+在终端里询问一道菜需要哪些食材、用量是多少，或者怎么做。助手会从 HowToCook 菜谱中检索相关内容，再用 Kimi 生成回答。比如：
+
+> 西红柿炒鸡蛋需要什么食材？
+
+菜谱和向量索引保存在本地。程序使用 FAISS 和 BM25 组合检索，并把相关菜谱内容交给 Moonshot API 生成回答。
 
 ## 本地运行
 
-先在本仓库根目录获取 [HowToCook](https://github.com/Anduin2017/HowToCook) 菜谱数据。下列命令把菜谱放到原代码默认读取的位置；菜谱数据和生成的索引均由 Git 忽略。
+需要 Python 3.12、Git 和可调用 Kimi 的 Moonshot API Key。以下命令从项目根目录执行。
+
+### 1. 准备菜谱
+
+首次运行时下载 HowToCook 的菜谱。已有 `data/recipes/` 时可以跳过这一步。
 
 ```sh
-mkdir -p data/C8
 recipe_tmp=$(mktemp -d)
 git clone --depth 1 --filter=blob:none --sparse https://github.com/Anduin2017/HowToCook.git "$recipe_tmp/HowToCook"
 git -C "$recipe_tmp/HowToCook" sparse-checkout set dishes
-cp -R "$recipe_tmp/HowToCook/dishes" data/C8/cook
+mkdir -p data
+cp -R "$recipe_tmp/HowToCook/dishes" data/recipes
+cp "$recipe_tmp/HowToCook/LICENSE" data/recipes/HowToCook-LICENSE
 ```
 
-使用 Python 3.12，从本仓库根目录执行：
+### 2. 配置环境
 
 ```sh
-cd code/C8
 python3.12 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements.txt
-cp .env.example .env
+python -m pip install -r app/requirements.txt
+cp -n app/.env.example app/.env
 ```
 
-在 `code/C8/.env` 填入自己的 `MOONSHOT_API_KEY`，随后在 `code/C8` 运行 `python main.py`。首次运行需要下载嵌入模型并构建索引；生成模型由 `config.py` 配置，如果原教程的模型 ID 已不可用，请换成你账号可用的 Moonshot 模型。
+已有装好依赖的 Python 3.12 环境时，可以直接激活该环境。把 `MOONSHOT_API_KEY` 填在 `app/.env` 中。Git 会忽略该文件、菜谱和生成的索引。
+
+### 3. 启动问答
+
+```sh
+python app/main.py
+```
+
+首次启动会下载嵌入模型并构建索引，后续会读取 `app/vector_index/` 中的缓存。出现「您的问题」后输入菜谱问题，输入 `y` 以流式显示回答，输入「退出」结束。
+
+默认生成模型为 `kimi-k2.6`。模型和生成参数可以在 `app/config.py` 修改。如果遇到 `429`，请稍后再问；一次问答可能需要多次 API 请求。
+
+## 来源与许可
+
+- 项目代码基于 [Datawhale All-in-RAG 的菜谱问答示例](https://github.com/datawhalechina/all-in-rag/tree/cec956e80ae28d6c0ca84c9d39dddcf61ad633fd/code/C8)，原项目使用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)。
+- 菜谱来自 [Anduin2017/HowToCook](https://github.com/Anduin2017/HowToCook)，适用其仓库中的 [许可证](https://github.com/Anduin2017/HowToCook/blob/master/LICENSE)。
