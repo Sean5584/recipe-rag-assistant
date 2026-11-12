@@ -12,12 +12,19 @@ from langchain_core.documents import Document
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 
+from config import DEFAULT_CONFIG
+
 logger = logging.getLogger(__name__)
 
 class GenerationIntegrationModule:
     """生成集成模块 - 负责LLM集成和回答生成"""
     
-    def __init__(self, model_name: str = "kimi-k2-0711-preview", temperature: float = 0.1, max_tokens: int = 2048):
+    def __init__(
+        self,
+        model_name: str = DEFAULT_CONFIG.llm_model,
+        temperature: float = DEFAULT_CONFIG.temperature,
+        max_tokens: int = DEFAULT_CONFIG.max_tokens,
+    ):
         """
         初始化生成集成模块
         
