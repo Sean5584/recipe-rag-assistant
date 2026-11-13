@@ -25,6 +25,7 @@ def main():
         parser.error("需要 k > 0、size > 0 且 0 <= overlap < size")
 
     questions = json.loads(args.questions.read_text(encoding="utf-8"))
+    questions = [row for row in questions if row.get("answerable", True)]
     if not questions or len({row["id"] for row in questions}) != len(questions):
         parser.error("题集不能为空，且问题 ID 不可重复")
 

@@ -65,3 +65,25 @@ python app/compare_chunking.py --k 3 --size 400 --overlap 80 > chunking-results.
 - **证据 Hit@k**：前 k 个片段中至少一个来自标注菜谱，并在忽略空白后包含完整的标注原文。跨片段才能拼齐的证据不算命中。
 
 默认使用 `experiments/retrieval_pilot.json` 的 8 道试验题，每题含参考答案、来源路径和证据。JSON 输出包含总体统计和逐题结果。可用 `--questions` 指定同格式的题集。试验题用于检查实验流程，正式评测还需至少 20 组问答及答案正确率。
+
+## 正式评测：20 道可回答题和 4 道拒答题
+
+`experiments/qa_benchmark.json` 含试验题及新增题。可回答题标有参考答案、菜谱路径和证据；拒答题不纳入检索命中率的分母。由于这 20 道题包含前期看过的 8 道试验题，它们不是独立留出的测试集，报告中应说明。
+
+```sh
+python app/compare_chunking.py --questions experiments/qa_benchmark.json > chunking-results.json
+python app/evaluate_answers.py collect --results answer-eval-results.json
+```
+
+第一条命令比较两种分块的纯向量检索，第二条命令调用实际问答流程（包括完整菜名定位或混合检索），需要自己的 Moonshot API Key。采集默认在题目之间等待 61 秒以避开限流；可以用 `--limit 2` 先试两题。遇到限流时等一分钟后重跑同一命令，已有结果会保留，程序从下一题继续。不要在采集中同时运行交互问答。
+
+打开 `answer-eval-results.json`，逐题对比 `actual`、参考答案和原文，把 `correct` 从 `null` 改为 `true` 或 `false`：
+
+- 可回答题：关键事实、数量和单位正确，没有额外的无依据断言，并且引用的原文支持该答案，才标为正确。等价表述可以接受。
+- 拒答题：明确说明知识库未提供所问信息且没有猜测，才标为正确。API 错误或「未能生成可核验的回答」不算正确拒答。
+
+```sh
+python app/evaluate_answers.py score --results answer-eval-results.json
+```
+
+脚本分别报告答案正确率和拒答正确率。未判完的分组只显示进度。两类结果文件默认由 Git 忽略，报告可另行记录最终统计。

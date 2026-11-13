@@ -9,3 +9,5 @@ vector_index/
 /data/recipes/
 
 /chunking-results.json
+answer-eval-results.json
+answer-eval-results.json.tmp

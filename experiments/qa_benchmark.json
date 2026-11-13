@@ -1,0 +1,166 @@
+[
+  {
+    "id": "p01",
+    "question": "西红柿炒鸡蛋的糖是必须的吗？",
+    "source": "vegetable_dish/西红柿炒鸡蛋.md",
+    "evidence": "糖（可选）",
+    "answer": "不是，糖可选。"
+  },
+  {
+    "id": "p02",
+    "question": "番茄炒蛋每份用多少西红柿？",
+    "source": "vegetable_dish/西红柿炒鸡蛋.md",
+    "evidence": "西红柿 = 1 个（约 180g） * 份数",
+    "answer": "每份 1 个，约 180 克。"
+  },
+  {
+    "id": "p03",
+    "question": "做凉拌黄瓜用白糖腌多久？",
+    "source": "vegetable_dish/凉拌黄瓜.md",
+    "evidence": "腌制 15 分钟",
+    "answer": "15 分钟。"
+  },
+  {
+    "id": "p04",
+    "question": "凉拌黄瓜放冰箱冷藏后多久要吃完？",
+    "source": "vegetable_dish/凉拌黄瓜.md",
+    "evidence": "在 8 小时内食用完毕",
+    "answer": "8 小时内。"
+  },
+  {
+    "id": "p05",
+    "question": "清蒸南瓜大火蒸几分钟？",
+    "source": "vegetable_dish/清蒸南瓜.md",
+    "evidence": "15-20 分钟",
+    "answer": "15–20 分钟。"
+  },
+  {
+    "id": "p06",
+    "question": "做紫菜蛋花汤前，干紫菜要泡多久？",
+    "source": "soup/紫菜蛋花汤.md",
+    "evidence": "干紫菜用清水泡 15 分钟",
+    "answer": "用清水泡 15 分钟。"
+  },
+  {
+    "id": "p07",
+    "question": "宫保鸡丁的配料表里熟花生用多少？",
+    "source": "meat_dish/宫保鸡丁/宫保鸡丁.md",
+    "evidence": "熟花生 = 150g",
+    "answer": "150 克。"
+  },
+  {
+    "id": "p08",
+    "question": "糖拌西红柿撒糖后冷藏多久？",
+    "source": "vegetable_dish/糖拌西红柿/糖拌西红柿.md",
+    "evidence": "放入冰箱冷藏 10 分钟",
+    "answer": "冷藏 10 分钟。"
+  },
+  {
+    "id": "p09",
+    "question": "西红柿炒鸡蛋菜谱预估多少大卡？",
+    "source": "vegetable_dish/西红柿炒鸡蛋.md",
+    "evidence": "预估卡路里：252 大卡",
+    "answer": "252 大卡。"
+  },
+  {
+    "id": "p10",
+    "question": "西红柿炒鸡蛋翻炒西红柿的时间是多少？",
+    "source": "vegetable_dish/西红柿炒鸡蛋.md",
+    "evidence": "翻炒 20 秒，或至西红柿软烂",
+    "answer": "约 20 秒，或至西红柿软烂。"
+  },
+  {
+    "id": "p11",
+    "question": "凉拌黄瓜每份需要多少克黄瓜？",
+    "source": "vegetable_dish/凉拌黄瓜.md",
+    "evidence": "黄瓜 200 克  * 份数",
+    "answer": "200 克。"
+  },
+  {
+    "id": "p12",
+    "question": "凉拌黄瓜需要多少蚝油？",
+    "source": "vegetable_dish/凉拌黄瓜.md",
+    "evidence": "蚝油 5 ml",
+    "answer": "5 毫升。"
+  },
+  {
+    "id": "p13",
+    "question": "清蒸南瓜每份用多少南瓜？",
+    "source": "vegetable_dish/清蒸南瓜.md",
+    "evidence": "南瓜 300 g",
+    "answer": "300 克。"
+  },
+  {
+    "id": "p14",
+    "question": "清蒸南瓜一定要去皮吗？",
+    "source": "vegetable_dish/清蒸南瓜.md",
+    "evidence": "也可以不去皮蒸，但需要彻底洗净",
+    "answer": "不必，但要彻底洗净。"
+  },
+  {
+    "id": "p15",
+    "question": "紫菜蛋花汤一人份要几个鸡蛋？",
+    "source": "soup/紫菜蛋花汤.md",
+    "evidence": "两个鸡蛋",
+    "answer": "两个。"
+  },
+  {
+    "id": "p16",
+    "question": "紫菜蛋花汤倒入蛋液后多久起锅？",
+    "source": "soup/紫菜蛋花汤.md",
+    "evidence": "30 秒既可起锅",
+    "answer": "30 秒。"
+  },
+  {
+    "id": "p17",
+    "question": "宫保鸡丁用什么鸡肉？",
+    "source": "meat_dish/宫保鸡丁/宫保鸡丁.md",
+    "evidence": "手枪腿（或者鸡胸脯肉）",
+    "answer": "手枪腿或鸡胸脯肉。"
+  },
+  {
+    "id": "p18",
+    "question": "宫保鸡丁默认版本用多少淀粉？",
+    "source": "meat_dish/宫保鸡丁/宫保鸡丁.md",
+    "evidence": "淀粉 = 15g",
+    "answer": "15 克。"
+  },
+  {
+    "id": "p19",
+    "question": "糖拌西红柿每份加多少白砂糖？",
+    "source": "vegetable_dish/糖拌西红柿/糖拌西红柿.md",
+    "evidence": "白砂糖 20g",
+    "answer": "20 克。"
+  },
+  {
+    "id": "p20",
+    "question": "糖拌西红柿一份够几个人吃？",
+    "source": "vegetable_dish/糖拌西红柿/糖拌西红柿.md",
+    "evidence": "一份正好够 2 人吃",
+    "answer": "2 人。"
+  },
+  {
+    "id": "u01",
+    "question": "西红柿炒鸡蛋原菜谱注明每份含多少毫克钠吗？",
+    "answer": "知识库未提供该信息。",
+    "answerable": false
+  },
+  {
+    "id": "u02",
+    "question": "清蒸南瓜的菜谱写了蒸锅是什么品牌吗？",
+    "answer": "知识库未提供该信息。",
+    "answerable": false
+  },
+  {
+    "id": "u03",
+    "question": "宫保鸡丁原菜谱给出了每份反式脂肪的克数吗？",
+    "answer": "知识库未提供该信息。",
+    "answerable": false
+  },
+  {
+    "id": "u04",
+    "question": "糖拌西红柿的菜谱注明了冷藏室的精确温度吗？",
+    "answer": "知识库未提供该信息。",
+    "answerable": false
+  }
+]
