@@ -128,20 +128,26 @@ class DataPreparationModule:
         """对外提供支持的难度标签列表"""
         return cls.DIFFICULTY_LABELS
     
-    def chunk_documents(self) -> List[Document]:
+    def chunk_documents(
+        self, strategy: str = "markdown", *, size: int = 400, overlap: int = 80
+    ) -> List[Document]:
         """
-        Markdown结构感知分块
+        按 Markdown 标题或固定字符窗口分块。
 
         Returns:
             分块后的文档列表
         """
-        logger.info("正在进行Markdown结构感知分块...")
 
         if not self.documents:
             raise ValueError("请先加载文档")
 
-        # 使用Markdown标题分割器
-        chunks = self._markdown_header_split()
+        self.parent_child_map.clear()
+        if strategy == "markdown":
+            chunks = self._markdown_header_split()
+        elif strategy == "fixed":
+            chunks = self._fixed_window_split(size, overlap)
+        else:
+            raise ValueError(f"未知分块策略: {strategy}")
 
         # 为每个chunk添加基础元数据
         for i, chunk in enumerate(chunks):
@@ -149,7 +155,25 @@ class DataPreparationModule:
             chunk.metadata['chunk_size'] = len(chunk.page_content)
 
         self.chunks = chunks
-        logger.info(f"Markdown分块完成，共生成 {len(chunks)} 个chunk")
+        logger.info(f"{strategy} 分块完成，共生成 {len(chunks)} 个片段")
+        return chunks
+
+    def _fixed_window_split(self, size: int, overlap: int) -> List[Document]:
+        if size <= 0 or not 0 <= overlap < size:
+            raise ValueError("需要 size > 0 且 0 <= overlap < size")
+        chunks = []
+        for doc in self.documents:
+            windows = []
+            for start in range(0, len(doc.page_content), size - overlap):
+                end = min(start + size, len(doc.page_content))
+                windows.append(Document(
+                    page_content=doc.page_content[start:end],
+                    metadata={"char_start": start, "char_end": end},
+                ))
+                if end == len(doc.page_content):
+                    break
+            self._attach_chunk_metadata(doc, windows, f"fixed:{size}:{overlap}")
+            chunks.extend(windows)
         return chunks
 
     def _markdown_header_split(self) -> List[Document]:
@@ -198,18 +222,22 @@ class DataPreparationModule:
         logger.info(f"Markdown结构分割完成，生成 {len(all_chunks)} 个结构化块")
         return all_chunks
 
-    def _attach_chunk_metadata(self, doc: Document, chunks: List[Document]):
+    def _attach_chunk_metadata(self, doc: Document, chunks: List[Document], strategy: str = "markdown"):
         parent_id = doc.metadata["parent_id"]
         for index, chunk in enumerate(chunks):
             headings = [chunk.metadata[key] for key in ("主标题", "二级标题", "三级标题")
                         if key in chunk.metadata]
             identity = f"{parent_id}:{index}:{chunk.page_content}"
+            if strategy != "markdown":
+                identity = f"{strategy}:{identity}"
             chunk_id = hashlib.sha256(identity.encode("utf-8")).hexdigest()[:20]
             chunk.metadata.update(doc.metadata)
             chunk.metadata.update(
                 chunk_id=chunk_id, chunk_index=index, doc_type="child",
                 section=" / ".join(headings) or "全文",
             )
+            if "char_start" in chunk.metadata:
+                chunk.metadata["section"] = f"字符区间 [{chunk.metadata['char_start']}, {chunk.metadata['char_end']})"
             self.parent_child_map[chunk_id] = parent_id
 
     def find_named_recipe_chunks(self, question: str) -> List[Document]:

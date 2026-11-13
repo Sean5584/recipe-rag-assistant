@@ -7,3 +7,5 @@ __pycache__/
 !.env.example
 vector_index/
 /data/recipes/
+
+/chunking-results.json

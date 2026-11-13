@@ -50,3 +50,18 @@ python app/main.py
 
 - 项目代码基于 [Datawhale All-in-RAG 的菜谱问答示例](https://github.com/datawhalechina/all-in-rag/tree/cec956e80ae28d6c0ca84c9d39dddcf61ad633fd/code/C8)，原项目使用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)。
 - 菜谱来自 [Anduin2017/HowToCook](https://github.com/Anduin2017/HowToCook)，适用其仓库中的 [许可证](https://github.com/Anduin2017/HowToCook/blob/master/LICENSE)。
+
+## 分块检索对照实验
+
+从项目根目录运行（需要已准备菜谱和 Python 依赖，无需 Moonshot API Key）：
+
+```sh
+python app/compare_chunking.py --k 3 --size 400 --overlap 80 > chunking-results.json
+```
+
+脚本用相同语料、BGE 嵌入模型、问题和 top-k，对比 Markdown 标题分块与固定字符窗口分块（默认 400 字符、重叠 80 字符）。两者独立构建内存索引，只做向量相似度检索，不使用菜名直达、BM25、查询改写或 LLM 生成；日常问答仍使用原有 Markdown 索引。
+
+- **文档 Hit@k**：前 k 个片段中至少一个来自标注菜谱。
+- **证据 Hit@k**：前 k 个片段中至少一个来自标注菜谱，并在忽略空白后包含完整的标注原文。跨片段才能拼齐的证据不算命中。
+
+默认使用 `experiments/retrieval_pilot.json` 的 8 道试验题，每题含参考答案、来源路径和证据。JSON 输出包含总体统计和逐题结果。可用 `--questions` 指定同格式的题集。试验题用于检查实验流程，正式评测还需至少 20 组问答及答案正确率。

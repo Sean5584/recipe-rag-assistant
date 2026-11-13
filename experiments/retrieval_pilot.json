@@ -1,0 +1,10 @@
+[
+  {"id":"p01","question":"西红柿炒鸡蛋的糖是必须的吗？","source":"vegetable_dish/西红柿炒鸡蛋.md","evidence":"糖（可选）","answer":"不是，糖可选。"},
+  {"id":"p02","question":"番茄炒蛋每份用多少西红柿？","source":"vegetable_dish/西红柿炒鸡蛋.md","evidence":"西红柿 = 1 个（约 180g） * 份数","answer":"每份 1 个，约 180 克。"},
+  {"id":"p03","question":"做凉拌黄瓜用白糖腌多久？","source":"vegetable_dish/凉拌黄瓜.md","evidence":"腌制 15 分钟","answer":"15 分钟。"},
+  {"id":"p04","question":"凉拌黄瓜放冰箱冷藏后多久要吃完？","source":"vegetable_dish/凉拌黄瓜.md","evidence":"在 8 小时内食用完毕","answer":"8 小时内。"},
+  {"id":"p05","question":"清蒸南瓜大火蒸几分钟？","source":"vegetable_dish/清蒸南瓜.md","evidence":"15-20 分钟","answer":"15–20 分钟。"},
+  {"id":"p06","question":"做紫菜蛋花汤前，干紫菜要泡多久？","source":"soup/紫菜蛋花汤.md","evidence":"干紫菜用清水泡 15 分钟","answer":"用清水泡 15 分钟。"},
+  {"id":"p07","question":"宫保鸡丁的配料表里熟花生用多少？","source":"meat_dish/宫保鸡丁/宫保鸡丁.md","evidence":"熟花生 = 150g","answer":"150 克。"},
+  {"id":"p08","question":"糖拌西红柿撒糖后冷藏多久？","source":"vegetable_dish/糖拌西红柿/糖拌西红柿.md","evidence":"放入冰箱冷藏 10 分钟","answer":"冷藏 10 分钟。"}
+]
