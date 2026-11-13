@@ -14,7 +14,7 @@ class RAGConfig:
 
     # 路径配置
     data_path: str = str(APP_DIR.parent / "data" / "recipes")
-    index_save_path: str = str(APP_DIR / "vector_index")
+    index_save_path: str = str(APP_DIR / "vector_index" / "citations-v1")
 
     # 模型配置
     embedding_model: str = "BAAI/bge-small-zh-v1.5"

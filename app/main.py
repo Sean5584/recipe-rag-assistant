@@ -125,44 +125,48 @@ class RecipeRAGSystem:
 
         print("✅ 知识库构建完成！")
     
-    def ask_question(self, question: str, stream: bool = False):
+    def ask_question(self, question: str) -> str:
         """
         回答用户问题
 
         Args:
             question: 用户问题
-            stream: 是否使用流式输出
 
         Returns:
-            生成的回答或生成器
+            带可核验引用的回答
         """
         if not all([self.retrieval_module, self.generation_module]):
             raise ValueError("请先构建知识库")
         
         print(f"\n❓ 用户问题: {question}")
 
-        # 1. 查询路由
-        route_type = self.generation_module.query_router(question)
-        print(f"🎯 查询类型: {route_type}")
+        relevant_chunks = self.data_module.find_named_recipe_chunks(question)
+        if relevant_chunks:
+            names = dict.fromkeys(chunk.metadata["dish_name"] for chunk in relevant_chunks)
+            print(f"🎯 按完整菜名定位：{'、'.join(names)}")
+        else:
+            # 1. 查询路由
+            route_type = self.generation_module.query_router(question)
+            print(f"🎯 查询类型: {route_type}")
 
-        # 2. 智能查询重写（根据路由类型）
-        if route_type == 'list':
-            # 列表查询保持原查询
-            rewritten_query = question
-            print(f"📝 列表查询保持原样: {question}")
-        else:
-            # 详细查询和一般查询使用智能重写
-            print("🤖 智能分析查询...")
-            rewritten_query = self.generation_module.query_rewrite(question)
-        
-        # 3. 检索相关子块（自动应用元数据过滤）
-        print("🔍 检索相关文档...")
-        filters = self._extract_filters_from_query(question)
-        if filters:
-            print(f"应用过滤条件: {filters}")
-            relevant_chunks = self.retrieval_module.metadata_filtered_search(rewritten_query, filters, top_k=self.config.top_k)
-        else:
-            relevant_chunks = self.retrieval_module.hybrid_search(rewritten_query, top_k=self.config.top_k)
+            # 2. 智能查询重写（根据路由类型）
+            if route_type == 'list':
+                # 列表查询保持原查询
+                rewritten_query = question
+                print(f"📝 列表查询保持原样: {question}")
+            else:
+                # 详细查询和一般查询使用智能重写
+                print("🤖 智能分析查询...")
+                rewritten_query = self.generation_module.query_rewrite(question)
+
+            # 3. 检索相关子块（自动应用元数据过滤）
+            print("🔍 检索相关文档...")
+            filters = self._extract_filters_from_query(question)
+            if filters:
+                print(f"应用过滤条件: {filters}")
+                relevant_chunks = self.retrieval_module.metadata_filtered_search(rewritten_query, filters, top_k=self.config.top_k)
+            else:
+                relevant_chunks = self.retrieval_module.hybrid_search(rewritten_query, top_k=self.config.top_k)
 
         # 显示检索到的子块信息
         if relevant_chunks:
@@ -187,54 +191,10 @@ class RecipeRAGSystem:
         if not relevant_chunks:
             return "抱歉，没有找到相关的食谱信息。请尝试其他菜品名称或关键词。"
 
-        # 5. 根据路由类型选择回答方式
-        if route_type == 'list':
-            # 列表查询：直接返回菜品名称列表
-            print("📋 生成菜品列表...")
-            relevant_docs = self.data_module.get_parent_documents(relevant_chunks)
+        evidence = self.data_module.get_evidence_chunks(relevant_chunks)
+        print("✍️ 生成带引用的回答...")
+        return self.generation_module.generate_cited_answer(question, evidence)
 
-            # 显示找到的文档名称
-            doc_names = []
-            for doc in relevant_docs:
-                dish_name = doc.metadata.get('dish_name', '未知菜品')
-                doc_names.append(dish_name)
-
-            if doc_names:
-                print(f"找到文档: {', '.join(doc_names)}")
-
-            return self.generation_module.generate_list_answer(question, relevant_docs)
-        else:
-            # 详细查询：获取完整文档并生成详细回答
-            print("获取完整文档...")
-            relevant_docs = self.data_module.get_parent_documents(relevant_chunks)
-
-            # 显示找到的文档名称
-            doc_names = []
-            for doc in relevant_docs:
-                dish_name = doc.metadata.get('dish_name', '未知菜品')
-                doc_names.append(dish_name)
-
-            if doc_names:
-                print(f"找到文档: {', '.join(doc_names)}")
-            else:
-                print(f"对应 {len(relevant_docs)} 个完整文档")
-
-            print("✍️ 生成详细回答...")
-
-            # 根据路由类型自动选择回答模式
-            if route_type == "detail":
-                # 详细查询使用分步指导模式
-                if stream:
-                    return self.generation_module.generate_step_by_step_answer_stream(question, relevant_docs)
-                else:
-                    return self.generation_module.generate_step_by_step_answer(question, relevant_docs)
-            else:
-                # 一般查询使用基础回答模式
-                if stream:
-                    return self.generation_module.generate_basic_answer_stream(question, relevant_docs)
-                else:
-                    return self.generation_module.generate_basic_answer(question, relevant_docs)
-    
     def _extract_filters_from_query(self, query: str) -> dict:
         """
         从用户问题中提取元数据过滤条件
@@ -277,21 +237,8 @@ class RecipeRAGSystem:
                 if user_input.lower() in ['退出', 'quit', 'exit', '']:
                     break
                 
-                # 询问是否使用流式输出
-                stream_choice = input("是否使用流式输出? (y/n, 默认y): ").strip().lower()
-                use_stream = stream_choice != 'n'
+                print(f"\n{self.ask_question(user_input)}\n")
 
-                print("\n回答:")
-                if use_stream:
-                    # 流式输出
-                    for chunk in self.ask_question(user_input, stream=True):
-                        print(chunk, end="", flush=True)
-                    print("\n")
-                else:
-                    # 普通输出
-                    answer = self.ask_question(user_input, stream=False)
-                    print(f"{answer}\n")
-                
             except KeyboardInterrupt:
                 break
             except Exception as e:

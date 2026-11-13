@@ -3,7 +3,6 @@
 """
 
 import logging
-import hashlib
 from typing import List, Dict, Any
 
 from langchain_community.vectorstores import FAISS
@@ -121,8 +120,7 @@ class RetrievalOptimizationModule:
 
         # 计算向量检索结果的RRF分数
         for rank, doc in enumerate(vector_docs):
-            # 使用文档内容的确定性哈希作为唯一标识
-            doc_id = hashlib.md5(doc.page_content.encode('utf-8')).hexdigest()
+            doc_id = doc.metadata["chunk_id"]
             doc_objects[doc_id] = doc
 
             # RRF公式: 1 / (k + rank)
@@ -133,7 +131,7 @@ class RetrievalOptimizationModule:
 
         # 计算BM25检索结果的RRF分数
         for rank, doc in enumerate(bm25_docs):
-            doc_id = hashlib.md5(doc.page_content.encode('utf-8')).hexdigest()
+            doc_id = doc.metadata["chunk_id"]
             doc_objects[doc_id] = doc
 
             rrf_score = 1.0 / (k + rank + 1)

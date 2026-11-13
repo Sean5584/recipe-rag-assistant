@@ -10,7 +10,6 @@ from typing import List, Dict, Any
 
 from langchain_text_splitters import MarkdownHeaderTextSplitter
 from langchain_core.documents import Document
-import uuid
 
 logger = logging.getLogger(__name__)
 
@@ -63,11 +62,7 @@ class DataPreparationModule:
                     content = f.read()
 
                 # 为每个父文档分配确定性的唯一ID（基于数据根目录的相对路径）
-                try:
-                    data_root = Path(self.data_path).resolve()
-                    relative_path = Path(md_file).resolve().relative_to(data_root).as_posix()
-                except Exception:
-                    relative_path = Path(md_file).as_posix()
+                relative_path = md_file.relative_to(data_path_obj).as_posix()
                 parent_id = hashlib.md5(relative_path.encode("utf-8")).hexdigest()
 
                 # 创建Document对象
@@ -75,6 +70,7 @@ class DataPreparationModule:
                     page_content=content,
                     metadata={
                         "source": str(md_file),
+                        "source_path": relative_path,
                         "parent_id": parent_id,
                         "doc_type": "parent"  # 标记为父文档
                     }
@@ -149,9 +145,6 @@ class DataPreparationModule:
 
         # 为每个chunk添加基础元数据
         for i, chunk in enumerate(chunks):
-            if 'chunk_id' not in chunk.metadata:
-                # 如果没有chunk_id（比如分割失败的情况），则生成一个
-                chunk.metadata['chunk_id'] = str(uuid.uuid4())
             chunk.metadata['batch_index'] = i  # 在当前批次中的索引
             chunk.metadata['chunk_size'] = len(chunk.page_content)
 
@@ -193,33 +186,60 @@ class DataPreparationModule:
                     logger.warning(f"文档 {doc.metadata.get('dish_name', '未知')} 未能按标题分割，可能缺少标题结构")
 
                 # 为每个子块建立与父文档的关系
-                parent_id = doc.metadata["parent_id"]
-
-                for i, chunk in enumerate(md_chunks):
-                    # 为子块分配唯一ID
-                    child_id = str(uuid.uuid4())
-
-                    # 合并原文档元数据和新的标题元数据
-                    chunk.metadata.update(doc.metadata)
-                    chunk.metadata.update({
-                        "chunk_id": child_id,
-                        "parent_id": parent_id,
-                        "doc_type": "child",  # 标记为子文档
-                        "chunk_index": i      # 在父文档中的位置
-                    })
-
-                    # 建立父子映射关系
-                    self.parent_child_map[child_id] = parent_id
-
+                self._attach_chunk_metadata(doc, md_chunks)
                 all_chunks.extend(md_chunks)
 
             except Exception as e:
                 logger.warning(f"文档 {doc.metadata.get('source', '未知')} Markdown分割失败: {e}")
-                # 如果Markdown分割失败，将整个文档作为一个chunk
-                all_chunks.append(doc)
+                fallback = Document(page_content=doc.page_content)
+                self._attach_chunk_metadata(doc, [fallback])
+                all_chunks.append(fallback)
 
         logger.info(f"Markdown结构分割完成，生成 {len(all_chunks)} 个结构化块")
         return all_chunks
+
+    def _attach_chunk_metadata(self, doc: Document, chunks: List[Document]):
+        parent_id = doc.metadata["parent_id"]
+        for index, chunk in enumerate(chunks):
+            headings = [chunk.metadata[key] for key in ("主标题", "二级标题", "三级标题")
+                        if key in chunk.metadata]
+            identity = f"{parent_id}:{index}:{chunk.page_content}"
+            chunk_id = hashlib.sha256(identity.encode("utf-8")).hexdigest()[:20]
+            chunk.metadata.update(doc.metadata)
+            chunk.metadata.update(
+                chunk_id=chunk_id, chunk_index=index, doc_type="child",
+                section=" / ".join(headings) or "全文",
+            )
+            self.parent_child_map[chunk_id] = parent_id
+
+    def find_named_recipe_chunks(self, question: str) -> List[Document]:
+        """在原问题中识别完整菜名，优先匹配较长的重叠菜名。"""
+        names = {doc.metadata["dish_name"] for doc in self.documents}
+        if not names:
+            return []
+        pattern = "|".join(re.escape(name) for name in sorted(names, key=lambda name: (-len(name), name)))
+        matched = set(re.findall(pattern, question))
+        return [chunk for chunk in self.chunks if chunk.metadata["dish_name"] in matched]
+
+    def get_evidence_chunks(self, hits: List[Document], max_chars: int = 9000) -> List[Document]:
+        """优先保留命中片段，再补同一菜谱的相邻证据（例如配料和用量）。"""
+        current = {chunk.metadata["chunk_id"]: chunk for chunk in self.chunks}
+        evidence = []
+        seen = set()
+        parent_ids = dict.fromkeys(hit.metadata["parent_id"] for hit in hits)
+        siblings = {parent_id: [] for parent_id in parent_ids}
+        for chunk in self.chunks:
+            if chunk.metadata["parent_id"] in siblings:
+                siblings[chunk.metadata["parent_id"]].append(chunk)
+        for candidate in [*hits, *(chunk for group in siblings.values() for chunk in group)]:
+            chunk_id = candidate.metadata["chunk_id"]
+            chunk = current.get(chunk_id)
+            if chunk is None or chunk_id in seen or len(chunk.page_content) > max_chars:
+                continue
+            evidence.append(chunk)
+            seen.add(chunk_id)
+            max_chars -= len(chunk.page_content)
+        return evidence
 
     def filter_documents_by_category(self, category: str) -> List[Document]:
         """
