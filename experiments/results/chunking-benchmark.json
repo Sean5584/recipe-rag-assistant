@@ -1,0 +1,790 @@
+{
+  "documents": 374,
+  "questions": 20,
+  "k": 3,
+  "model": "BAAI/bge-small-zh-v1.5",
+  "fixed_size": 400,
+  "fixed_overlap": 80,
+  "results": {
+    "markdown": {
+      "chunks": 2070,
+      "mean_chunk_chars": 164.2,
+      "document_hits": 19,
+      "evidence_hits": 14,
+      "document_hit_rate": 0.95,
+      "evidence_hit_rate": 0.7,
+      "per_question": [
+        {
+          "id": "p01",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/西红柿炒鸡蛋.md",
+              "section": "西红柿炒鸡蛋的做法 / 必备原料和工具"
+            },
+            {
+              "source": "vegetable_dish/西红柿豆腐汤羹/西红柿豆腐汤羹.md",
+              "section": "西红柿豆腐汤羹的做法 / 必备原料和工具"
+            },
+            {
+              "source": "vegetable_dish/西葫芦炒鸡蛋/西葫芦炒鸡蛋.md",
+              "section": "西葫芦炒鸡蛋的做法 / 必备原料和工具"
+            }
+          ]
+        },
+        {
+          "id": "p02",
+          "document_hit": false,
+          "evidence_hit": false,
+          "retrieved": [
+            {
+              "source": "soup/西红柿鸡蛋汤.md",
+              "section": "西红柿鸡蛋汤的做法 / 计算"
+            },
+            {
+              "source": "vegetable_dish/西红柿豆腐汤羹/西红柿豆腐汤羹.md",
+              "section": "西红柿豆腐汤羹的做法 / 计算"
+            },
+            {
+              "source": "vegetable_dish/西葫芦炒鸡蛋/西葫芦炒鸡蛋.md",
+              "section": "西葫芦炒鸡蛋的做法 / 操作"
+            }
+          ]
+        },
+        {
+          "id": "p03",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/凉拌黄瓜.md",
+              "section": "凉拌黄瓜的做法 / 操作"
+            },
+            {
+              "source": "vegetable_dish/凉拌黄瓜.md",
+              "section": "凉拌黄瓜的做法"
+            },
+            {
+              "source": "vegetable_dish/凉拌黄瓜.md",
+              "section": "凉拌黄瓜的做法 / 附加内容"
+            }
+          ]
+        },
+        {
+          "id": "p04",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/凉拌黄瓜.md",
+              "section": "凉拌黄瓜的做法 / 附加内容"
+            },
+            {
+              "source": "vegetable_dish/凉拌黄瓜.md",
+              "section": "凉拌黄瓜的做法"
+            },
+            {
+              "source": "vegetable_dish/凉拌黄瓜.md",
+              "section": "凉拌黄瓜的做法 / 操作"
+            }
+          ]
+        },
+        {
+          "id": "p05",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/清蒸南瓜.md",
+              "section": "清蒸南瓜的做法"
+            },
+            {
+              "source": "vegetable_dish/清蒸南瓜.md",
+              "section": "清蒸南瓜的做法 / 操作"
+            },
+            {
+              "source": "vegetable_dish/清蒸南瓜.md",
+              "section": "清蒸南瓜的做法 / 附加内容"
+            }
+          ]
+        },
+        {
+          "id": "p06",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "soup/紫菜蛋花汤.md",
+              "section": "紫菜蛋花汤的做法"
+            },
+            {
+              "source": "soup/紫菜蛋花汤.md",
+              "section": "紫菜蛋花汤的做法 / 操作"
+            },
+            {
+              "source": "soup/紫菜蛋花汤.md",
+              "section": "紫菜蛋花汤的做法 / 计算"
+            }
+          ]
+        },
+        {
+          "id": "p07",
+          "document_hit": true,
+          "evidence_hit": false,
+          "retrieved": [
+            {
+              "source": "meat_dish/宫保鸡丁/宫保鸡丁.md",
+              "section": "宫保鸡丁的做法"
+            },
+            {
+              "source": "meat_dish/宫保鸡丁/宫保鸡丁.md",
+              "section": "宫保鸡丁的做法 / 操作 / 稍加复杂但是更加令人垂涎欲滴的版本"
+            },
+            {
+              "source": "meat_dish/冬瓜桑拿鸡.md",
+              "section": "冬瓜桑拿鸡的做法 / 计算"
+            }
+          ]
+        },
+        {
+          "id": "p08",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/糖拌西红柿/糖拌西红柿.md",
+              "section": "糖拌西红柿的做法"
+            },
+            {
+              "source": "condiment/蔗糖糖浆/蔗糖糖浆.md",
+              "section": "蔗糖糖浆的做法 / 附加内容"
+            },
+            {
+              "source": "vegetable_dish/糖拌西红柿/糖拌西红柿.md",
+              "section": "糖拌西红柿的做法 / 操作"
+            }
+          ]
+        },
+        {
+          "id": "p09",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "soup/西红柿鸡蛋汤.md",
+              "section": "西红柿鸡蛋汤的做法 / 计算"
+            },
+            {
+              "source": "vegetable_dish/西红柿炒鸡蛋.md",
+              "section": "西红柿炒鸡蛋的做法"
+            },
+            {
+              "source": "vegetable_dish/西红柿豆腐汤羹/西红柿豆腐汤羹.md",
+              "section": "西红柿豆腐汤羹的做法 / 计算"
+            }
+          ]
+        },
+        {
+          "id": "p10",
+          "document_hit": true,
+          "evidence_hit": false,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/西葫芦炒鸡蛋/西葫芦炒鸡蛋.md",
+              "section": "西葫芦炒鸡蛋的做法 / 操作"
+            },
+            {
+              "source": "soup/西红柿鸡蛋汤.md",
+              "section": "西红柿鸡蛋汤的做法 / 操作"
+            },
+            {
+              "source": "vegetable_dish/西红柿炒鸡蛋.md",
+              "section": "西红柿炒鸡蛋的做法"
+            }
+          ]
+        },
+        {
+          "id": "p11",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/凉拌黄瓜.md",
+              "section": "凉拌黄瓜的做法"
+            },
+            {
+              "source": "vegetable_dish/凉拌黄瓜.md",
+              "section": "凉拌黄瓜的做法 / 计算"
+            },
+            {
+              "source": "vegetable_dish/凉拌黄瓜.md",
+              "section": "凉拌黄瓜的做法 / 操作"
+            }
+          ]
+        },
+        {
+          "id": "p12",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/凉拌黄瓜.md",
+              "section": "凉拌黄瓜的做法 / 计算"
+            },
+            {
+              "source": "vegetable_dish/凉拌黄瓜.md",
+              "section": "凉拌黄瓜的做法"
+            },
+            {
+              "source": "meat_dish/卤菜/卤菜.md",
+              "section": "卤菜的做法 / 操作 / 凉拌调料"
+            }
+          ]
+        },
+        {
+          "id": "p13",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/清蒸南瓜.md",
+              "section": "清蒸南瓜的做法 / 计算"
+            },
+            {
+              "source": "vegetable_dish/清蒸南瓜.md",
+              "section": "清蒸南瓜的做法"
+            },
+            {
+              "source": "vegetable_dish/清蒸南瓜.md",
+              "section": "清蒸南瓜的做法 / 操作"
+            }
+          ]
+        },
+        {
+          "id": "p14",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/清蒸南瓜.md",
+              "section": "清蒸南瓜的做法 / 附加内容"
+            },
+            {
+              "source": "vegetable_dish/清蒸南瓜.md",
+              "section": "清蒸南瓜的做法 / 操作"
+            },
+            {
+              "source": "vegetable_dish/清蒸南瓜.md",
+              "section": "清蒸南瓜的做法"
+            }
+          ]
+        },
+        {
+          "id": "p15",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "soup/紫菜蛋花汤.md",
+              "section": "紫菜蛋花汤的做法"
+            },
+            {
+              "source": "soup/紫菜蛋花汤.md",
+              "section": "紫菜蛋花汤的做法 / 计算"
+            },
+            {
+              "source": "soup/紫菜蛋花汤.md",
+              "section": "紫菜蛋花汤的做法 / 必备原料和工具"
+            }
+          ]
+        },
+        {
+          "id": "p16",
+          "document_hit": true,
+          "evidence_hit": false,
+          "retrieved": [
+            {
+              "source": "soup/紫菜蛋花汤.md",
+              "section": "紫菜蛋花汤的做法"
+            },
+            {
+              "source": "soup/番茄牛肉蛋花汤.md",
+              "section": "番茄牛肉蛋花汤的做法 / 操作 / 煮汤"
+            },
+            {
+              "source": "soup/紫菜蛋花汤.md",
+              "section": "紫菜蛋花汤的做法 / 附加内容"
+            }
+          ]
+        },
+        {
+          "id": "p17",
+          "document_hit": true,
+          "evidence_hit": false,
+          "retrieved": [
+            {
+              "source": "meat_dish/宫保鸡丁/宫保鸡丁.md",
+              "section": "宫保鸡丁的做法"
+            },
+            {
+              "source": "meat_dish/姜葱捞鸡/姜葱捞鸡.md",
+              "section": "姜葱捞鸡的做法 / 必备原料和工具"
+            },
+            {
+              "source": "meat_dish/宫保鸡丁/宫保鸡丁.md",
+              "section": "宫保鸡丁的做法 / 操作 / 简易版本"
+            }
+          ]
+        },
+        {
+          "id": "p18",
+          "document_hit": true,
+          "evidence_hit": false,
+          "retrieved": [
+            {
+              "source": "meat_dish/宫保鸡丁/宫保鸡丁.md",
+              "section": "宫保鸡丁的做法"
+            },
+            {
+              "source": "dessert/魔芋蛋糕/魔芋蛋糕.md",
+              "section": "魔芋蛋糕的做法 / 计算"
+            },
+            {
+              "source": "aquatic/蛏抱蛋/蛏抱蛋.md",
+              "section": "蛏抱蛋的做法 / 计算"
+            }
+          ]
+        },
+        {
+          "id": "p19",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/糖拌西红柿/糖拌西红柿.md",
+              "section": "糖拌西红柿的做法 / 计算"
+            },
+            {
+              "source": "meat_dish/西红柿牛腩/西红柿牛腩.md",
+              "section": "西红柿牛腩的做法 / 计算"
+            },
+            {
+              "source": "vegetable_dish/西红柿豆腐汤羹/西红柿豆腐汤羹.md",
+              "section": "西红柿豆腐汤羹的做法 / 计算"
+            }
+          ]
+        },
+        {
+          "id": "p20",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/糖拌西红柿/糖拌西红柿.md",
+              "section": "糖拌西红柿的做法 / 计算"
+            },
+            {
+              "source": "vegetable_dish/西葫芦炒鸡蛋/西葫芦炒鸡蛋.md",
+              "section": "西葫芦炒鸡蛋的做法 / 计算"
+            },
+            {
+              "source": "vegetable_dish/西红柿炒鸡蛋.md",
+              "section": "西红柿炒鸡蛋的做法 / 计算"
+            }
+          ]
+        }
+      ]
+    },
+    "fixed": {
+      "chunks": 1150,
+      "mean_chunk_chars": 350.3,
+      "document_hits": 20,
+      "evidence_hits": 18,
+      "document_hit_rate": 1,
+      "evidence_hit_rate": 0.9,
+      "per_question": [
+        {
+          "id": "p01",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/西红柿炒鸡蛋.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "vegetable_dish/西红柿炒鸡蛋.md",
+              "section": "字符区间 [320, 720)"
+            },
+            {
+              "source": "vegetable_dish/西葫芦炒鸡蛋/西葫芦炒鸡蛋.md",
+              "section": "字符区间 [320, 629)"
+            }
+          ]
+        },
+        {
+          "id": "p02",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/西红柿炒鸡蛋.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "vegetable_dish/西葫芦炒鸡蛋/西葫芦炒鸡蛋.md",
+              "section": "字符区间 [320, 629)"
+            },
+            {
+              "source": "vegetable_dish/西红柿炒鸡蛋.md",
+              "section": "字符区间 [640, 972)"
+            }
+          ]
+        },
+        {
+          "id": "p03",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/凉拌黄瓜.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "vegetable_dish/凉拌黄瓜.md",
+              "section": "字符区间 [320, 666)"
+            },
+            {
+              "source": "meat_dish/黄瓜炒肉.md",
+              "section": "字符区间 [0, 400)"
+            }
+          ]
+        },
+        {
+          "id": "p04",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/凉拌黄瓜.md",
+              "section": "字符区间 [320, 666)"
+            },
+            {
+              "source": "vegetable_dish/凉拌黄瓜.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "drink/冬瓜茶.md",
+              "section": "字符区间 [320, 651)"
+            }
+          ]
+        },
+        {
+          "id": "p05",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/清蒸南瓜.md",
+              "section": "字符区间 [320, 607)"
+            },
+            {
+              "source": "vegetable_dish/清蒸南瓜.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "meat_dish/萝卜炖羊排.md",
+              "section": "字符区间 [640, 910)"
+            }
+          ]
+        },
+        {
+          "id": "p06",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "soup/紫菜蛋花汤.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "soup/番茄牛肉蛋花汤.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "soup/紫菜蛋花汤.md",
+              "section": "字符区间 [320, 546)"
+            }
+          ]
+        },
+        {
+          "id": "p07",
+          "document_hit": true,
+          "evidence_hit": false,
+          "retrieved": [
+            {
+              "source": "meat_dish/宫保鸡丁/宫保鸡丁.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "meat_dish/宫保鸡丁/宫保鸡丁.md",
+              "section": "字符区间 [1280, 1680)"
+            },
+            {
+              "source": "meat_dish/口水鸡/口水鸡.md",
+              "section": "字符区间 [320, 720)"
+            }
+          ]
+        },
+        {
+          "id": "p08",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/糖拌西红柿/糖拌西红柿.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "condiment/蔗糖糖浆/蔗糖糖浆.md",
+              "section": "字符区间 [320, 467)"
+            },
+            {
+              "source": "vegetable_dish/糖拌西红柿/糖拌西红柿.md",
+              "section": "字符区间 [320, 534)"
+            }
+          ]
+        },
+        {
+          "id": "p09",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/西红柿炒鸡蛋.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "soup/西红柿鸡蛋汤.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "vegetable_dish/西葫芦炒鸡蛋/西葫芦炒鸡蛋.md",
+              "section": "字符区间 [320, 629)"
+            }
+          ]
+        },
+        {
+          "id": "p10",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/西葫芦炒鸡蛋/西葫芦炒鸡蛋.md",
+              "section": "字符区间 [320, 629)"
+            },
+            {
+              "source": "vegetable_dish/西红柿炒鸡蛋.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "vegetable_dish/西红柿炒鸡蛋.md",
+              "section": "字符区间 [640, 972)"
+            }
+          ]
+        },
+        {
+          "id": "p11",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/凉拌黄瓜.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "vegetable_dish/凉拌黄瓜.md",
+              "section": "字符区间 [320, 666)"
+            },
+            {
+              "source": "meat_dish/黄瓜炒肉.md",
+              "section": "字符区间 [0, 400)"
+            }
+          ]
+        },
+        {
+          "id": "p12",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/凉拌黄瓜.md",
+              "section": "字符区间 [320, 666)"
+            },
+            {
+              "source": "vegetable_dish/凉拌黄瓜.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "staple/猪油拌饭.md",
+              "section": "字符区间 [320, 652)"
+            }
+          ]
+        },
+        {
+          "id": "p13",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/清蒸南瓜.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "vegetable_dish/清蒸南瓜.md",
+              "section": "字符区间 [320, 607)"
+            },
+            {
+              "source": "vegetable_dish/印度葫芦丸子.md",
+              "section": "字符区间 [320, 720)"
+            }
+          ]
+        },
+        {
+          "id": "p14",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/清蒸南瓜.md",
+              "section": "字符区间 [320, 607)"
+            },
+            {
+              "source": "vegetable_dish/清蒸南瓜.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "soup/山药南瓜炖鸡汤.md",
+              "section": "字符区间 [320, 595)"
+            }
+          ]
+        },
+        {
+          "id": "p15",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "soup/紫菜蛋花汤.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "vegetable_dish/鸡蛋花/鸡蛋花.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "breakfast/茶叶蛋.md",
+              "section": "字符区间 [0, 400)"
+            }
+          ]
+        },
+        {
+          "id": "p16",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "soup/紫菜蛋花汤.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "soup/紫菜蛋花汤.md",
+              "section": "字符区间 [320, 546)"
+            },
+            {
+              "source": "soup/金针菇汤.md",
+              "section": "字符区间 [320, 511)"
+            }
+          ]
+        },
+        {
+          "id": "p17",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "meat_dish/宫保鸡丁/宫保鸡丁.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "meat_dish/葱烧鸡腿.md",
+              "section": "字符区间 [320, 720)"
+            },
+            {
+              "source": "meat_dish/葱烧鸡腿.md",
+              "section": "字符区间 [640, 1040)"
+            }
+          ]
+        },
+        {
+          "id": "p18",
+          "document_hit": true,
+          "evidence_hit": false,
+          "retrieved": [
+            {
+              "source": "meat_dish/宫保鸡丁/宫保鸡丁.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "aquatic/肉蟹煲.md",
+              "section": "字符区间 [320, 720)"
+            },
+            {
+              "source": "dessert/炸鲜奶/炸鲜奶.md",
+              "section": "字符区间 [320, 720)"
+            }
+          ]
+        },
+        {
+          "id": "p19",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/糖拌西红柿/糖拌西红柿.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "vegetable_dish/糖拌西红柿/糖拌西红柿.md",
+              "section": "字符区间 [320, 534)"
+            },
+            {
+              "source": "dessert/芋泥雪媚娘/芋泥雪媚娘.md",
+              "section": "字符区间 [320, 720)"
+            }
+          ]
+        },
+        {
+          "id": "p20",
+          "document_hit": true,
+          "evidence_hit": true,
+          "retrieved": [
+            {
+              "source": "vegetable_dish/糖拌西红柿/糖拌西红柿.md",
+              "section": "字符区间 [0, 400)"
+            },
+            {
+              "source": "meat_dish/红烧肉/南派红烧肉.md",
+              "section": "字符区间 [320, 720)"
+            },
+            {
+              "source": "vegetable_dish/红烧茄子.md",
+              "section": "字符区间 [320, 720)"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
